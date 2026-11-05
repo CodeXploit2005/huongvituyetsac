@@ -2,6 +2,21 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+### MongoDB DNS on local networks
+
+If Atlas reports `querySrv ECONNREFUSED`, the configured DNS resolver may be
+rejecting SRV queries. On an affected machine, add this to `.env.local` and restart
+the development server:
+
+```dotenv
+MONGODB_DNS_SERVERS=1.1.1.1,8.8.8.8
+```
+
+Keep the existing `MONGODB_URI`. This optional setting changes Node.js DNS
+resolution for the application process; it does not change Windows network
+settings. Leave it unset where the default DNS works. See
+[MongoDB's connection troubleshooting guide](https://www.mongodb.com/docs/atlas/troubleshoot-connection/).
+
 First, run the development server:
 
 ```bash
